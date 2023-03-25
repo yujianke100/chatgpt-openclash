@@ -17,9 +17,9 @@
 
 
 # 注意事项
-1. fake-ip模式存在解析异常,目前未查明原因，请使用Redir-Host 兼容 模式
+1. fake-ip模式存在解析异常,目前未查明原因，请使用Redir-Host 兼容 模式（fake-ip偶尔会出现状况）
 
-2. chatgpt 的网站启用了 http3 ，基于 quic ，基于 udp 如果出现还不能指定节点的情况，请开启UDP 代理，就算开启了 UDP 代理，因为 V2RAY 不支持 http3 的域名嗅探，所以基于域名的路由规则就失效了。不要全局，要不就只能基于 geoip 来。当然，最简单的办法还是把浏览器的 http3 支持给关了：
+2. chatgpt 的网站启用了 http3 ，基于 quic ，基于 udp 如果出现还不能指定节点的情况，请开启UDP 代理，就算开启了 UDP 代理，因为 V2RAY 不支持 http3 的域名嗅探，所以基于域名的路由规则就失效了。不要全局，要不就只能基于 geoip 来。当然，最简单的办法还是把浏览器的 http3 支持给关了：（重要）
 
 ```csharp
     chrome://flags/#enable-quic
