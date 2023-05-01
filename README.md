@@ -29,3 +29,10 @@
 降级成 http1/2 就能让域名路由规则生效了。
 
 订阅连接为 https://acl4ssr-sub.github.io/  接口,若担心安全问题，建议开启本地订阅，修改参数为 config=https%3A%2F%2Fraw.githubusercontent.com%2Fwgetnz%2Fchatgpt%2Fmain%2FFull.ini 即可，也可fork本项目，自行修改
+
+
+tips:
+
+出现openAI支付绑卡失败的，试使使用相对于的节点支付
+
+如:使用路由器上openclash使用日本节点,开启udp模式，本机电脑装上warp+，会自动连接到日本的响应节点，在绑卡支付，账单选日本区域即可，信用卡没什么要求，非中国信用卡即可
