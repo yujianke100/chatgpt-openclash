@@ -1,5 +1,7 @@
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,pay.openai.com
+DOMAIN-SUFFIX,identrust.com
+DOMAIN,openaiapi-site.azureedge.net
 DOMAIN-SUFFIX,chat.openai.com
 DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-SUFFIX,auth0.openai.com
