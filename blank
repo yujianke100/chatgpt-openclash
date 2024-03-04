@@ -16,7 +16,14 @@ dns:
     - '1.1.1.1'
 
 # 代理节点列表
-proxies: []
+proxies:
+- name: "empty"
+  type: ss
+  server: example.com
+  port: 8704
+  password: aa
+  cipher: 2022-blake3-aes-256-gcm
+  udp: true
 
 # 代理组策略
 proxy-groups:
