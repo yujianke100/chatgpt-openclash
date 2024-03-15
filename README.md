@@ -2,11 +2,24 @@
 
 因Chatgpt香港节点不支持，所以独立创建了一份openclash分流规则
 
+如果无法访问`raw.githubusercontent.com`，可以使用镜像:`raw.gitmirror.com`
+
+## 关于hy2
+
+可以使用后端：(https://suburl.v1.mk/)[https://suburl.v1.mk/]，使用方法：
+```
+https://api.v1.mk/sub?target=clash&url=你的订阅链接(需要使用URL编码)&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%yujianke100%chatgpt-openclash%main%2Full.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true
+```
+
+## 其他订阅
+
 基础规则：ACL4SSR_Online_Full 全分组重度用户使用(与Github同步)  致谢：ACL4SSR
 
 使用方法(到openclash配置文件处更新订阅链接)
 
-    https://api.dler.io/sub?target=clash&new_name=true&url=你的订阅链接(需要使用URL编码，)&config=https://raw.githubusercontent.com/yujianke100/chatgpt-openclash/main/Full.ini
+    https://api.dler.io/sub?target=clash&new_name=true&url=你的订阅链接(需要使用URL编码)&config=https://raw.githubusercontent.com/yujianke100/chatgpt-openclash/main/Full.ini
+
+## 使用
     
 控制面板中，Chatgpt选择节点选择，节点选择选择除中国地区（包含香港）的其他节点即可
 
