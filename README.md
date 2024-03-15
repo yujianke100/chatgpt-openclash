@@ -8,7 +8,7 @@
 
 可以使用后端：[https://suburl.v1.mk](https://suburl.v1.mk)，使用方法：
 ```
-https://api.v1.mk/sub?target=clash&url=你的订阅链接(需要使用URL编码)&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%yujianke100%chatgpt-openclash%main%2Full.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true
+https://api.v1.mk/sub?target=clash&url=你的订阅链接(需要使用URL编码)&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2Fyujianke100%2Fchatgpt-openclash%2Fmain%2FFull.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true
 ```
 
 ## 其他订阅
