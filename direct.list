@@ -3,8 +3,6 @@ DOMAIN-SUFFIX,gitclone.com
 DOMAIN-SUFFIX,ghp.ci
 DOMAIN-SUFFIX,workupload.com
 
-DOMAIN-KEYWORD,grammarly
-DOMAIN-SUFFIX,grammarly.com
 DOMAIN-SUFFIX,global.rel.tunnels.api.visualstudio.com
 DOMAIN-SUFFIX,asse.rel.tunnels.api.visualstudio.com
 DOMAIN-SUFFIX,hf.co
@@ -12,3 +10,5 @@ DOMAIN-SUFFIX,hf.co
 DOMAIN-KEYWORD,frp-act
 DOMAIN-KEYWORD,natfrp
 DOMAIN-KEYWORD,readpaper.com
+
+DOMAIN-SUFFIX,jianke-yu.online
