@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Clash 订阅分流链接生成</title>
+    <title>302实验室东方网络订阅分流链接生成</title>
     <style>
       :root {
         --bg: #f6efe6;
@@ -207,7 +207,7 @@
       <header>
         <h1>Clash 订阅分流链接生成</h1>
         <p class="subtitle">
-          输入你的订阅链接（常规格式），自动生成两条可复制的分流合成链接。
+          输入你的订阅链接（常规格式），自动生成可复制的分流合成链接。
           系统会将订阅链接进行 URL 编码后拼接到模板中。
         </p>
       </header>
@@ -221,34 +221,22 @@
             placeholder="https://api.touhou.center/sub/xxx/clash"
             autocomplete="off"
           />
-          <button id="generateBtn" type="button">生成链接</button>
         </div>
         <p class="helper">例如：https://api.touhou.center/sub/xxx/clash</p>
 
         <div class="links">
           <div class="link-card">
             <header>
-              <h2>MK API 合成链接</h2>
-              <div class="action-row">
-                <button class="copy-btn" data-target="linkA" type="button">复制</button>
-                <button class="open-btn button-secondary" data-target="linkA" type="button">一键拉起</button>
-              </div>
-            </header>
-            <textarea id="linkA" readonly></textarea>
-          </div>
-
-          <div class="link-card">
-            <header>
               <h2>Dler API 合成链接</h2>
               <div class="action-row">
                 <button class="copy-btn" data-target="linkB" type="button">复制</button>
-                <button class="open-btn button-secondary" data-target="linkB" type="button">一键拉起</button>
+                <button class="open-btn button-secondary" data-target="linkB" type="button">导入 Clash</button>
               </div>
             </header>
             <textarea id="linkB" readonly></textarea>
           </div>
         </div>
-        <p class="helper">一键拉起使用通用协议 clash://install-config?url=...，不同客户端兼容性可能不同。</p>
+        <p class="helper">提示：仅适配东方网络原始 Clash 订阅链接。</p>
       </section>
 
       <section class="resources">
@@ -283,21 +271,15 @@
       </section>
 
       <footer>
-        提示：系统会自动对订阅链接进行 URL 编码后再生成合成链接。
+        说明：系统会自动对订阅链接进行 URL 编码后再生成合成链接。
       </footer>
     </div>
 
     <script>
       const input = document.getElementById("subUrl");
-      const linkA = document.getElementById("linkA");
       const linkB = document.getElementById("linkB");
-      const generateBtn = document.getElementById("generateBtn");
       const copyButtons = document.querySelectorAll(".copy-btn");
       const openButtons = document.querySelectorAll(".open-btn");
-
-      const mkBase =
-        "https://api.v1.mk/sub?target=clash&url=" +
-        "{encoded}&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2Fyujianke100%2Fchatgpt-openclash%2Fmain%2FFull.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true";
 
       const dlerBase =
         "https://api.dler.io/sub?target=clash&new_name=true&url=" +
@@ -306,12 +288,10 @@
       function buildLinks() {
         const raw = input.value.trim();
         if (!raw) {
-          linkA.value = "";
           linkB.value = "";
           return;
         }
         const encoded = encodeURIComponent(raw);
-        linkA.value = mkBase.replace("{encoded}", encoded);
         linkB.value = dlerBase.replace("{encoded}", encoded);
       }
 
@@ -333,10 +313,10 @@
           return;
         }
         const encoded = encodeURIComponent(target.value);
-        window.location.href = `clash://install-config?url=${encoded}&name=东方网络`;
+        const name = encodeURIComponent("东方网络");
+        window.location.href = `clash://install-config?url=${encoded}&name=${name}&interval=1440`;
       }
 
-      generateBtn.addEventListener("click", buildLinks);
       input.addEventListener("input", buildLinks);
       copyButtons.forEach((btn) => {
         btn.addEventListener("click", () => copyToClipboard(btn.dataset.target));
