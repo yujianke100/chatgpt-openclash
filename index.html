@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clash 订阅分流链接生成</title>
+    <style>
+      :root {
+        --bg: #f6efe6;
+        --surface: #fff8ef;
+        --ink: #231f1a;
+        --accent: #d2542b;
+        --accent-2: #0f7b6c;
+        --muted: #6a5d52;
+        --ring: rgba(210, 84, 43, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Karla", "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top, #fff4e6 0%, #f6efe6 55%, #efe4d8 100%);
+        min-height: 100vh;
+      }
+
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 56px 24px 80px;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 4vw, 3.4rem);
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      .subtitle {
+        font-size: 1.05rem;
+        color: var(--muted);
+        max-width: 720px;
+        line-height: 1.6;
+      }
+
+      .panel {
+        margin-top: 32px;
+        background: var(--surface);
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: 0 24px 45px rgba(35, 31, 26, 0.08);
+        border: 1px solid rgba(35, 31, 26, 0.06);
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .input-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      input[type="url"],
+      textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid rgba(35, 31, 26, 0.12);
+        font-size: 1rem;
+        outline: none;
+        background: #fff;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input[type="url"]:focus,
+      textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--ring);
+      }
+
+      button {
+        border: none;
+        padding: 12px 20px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 20px rgba(210, 84, 43, 0.25);
+      }
+
+      .button-secondary {
+        background: var(--accent-2);
+      }
+
+      .links {
+        margin-top: 24px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .link-card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 16px;
+        border: 1px solid rgba(35, 31, 26, 0.08);
+        display: grid;
+        gap: 10px;
+      }
+
+      .link-card header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .action-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .link-card h2 {
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      .copy-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+
+      .helper {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin-top: 10px;
+      }
+
+      .resources {
+        margin-top: 42px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .resource-card {
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid rgba(35, 31, 26, 0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .resource-card a {
+        color: var(--accent-2);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      footer {
+        margin-top: 46px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 720px) {
+        .panel {
+          padding: 20px;
+        }
+
+        .resource-card {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Clash 订阅分流链接生成</h1>
+        <p class="subtitle">
+          输入你的订阅链接（常规格式），自动生成两条可复制的分流合成链接。
+          系统会将订阅链接进行 URL 编码后拼接到模板中。
+        </p>
+      </header>
+
+      <section class="panel">
+        <label for="subUrl">订阅链接</label>
+        <div class="input-row">
+          <input
+            id="subUrl"
+            type="url"
+            placeholder="https://api.touhou.center/sub/xxx/clash"
+            autocomplete="off"
+          />
+          <button id="generateBtn" type="button">生成链接</button>
+        </div>
+        <p class="helper">例如：https://api.touhou.center/sub/xxx/clash</p>
+
+        <div class="links">
+          <div class="link-card">
+            <header>
+              <h2>MK API 合成链接</h2>
+              <div class="action-row">
+                <button class="copy-btn" data-target="linkA" type="button">复制</button>
+                <button class="open-btn button-secondary" data-target="linkA" type="button">一键拉起</button>
+              </div>
+            </header>
+            <textarea id="linkA" readonly></textarea>
+          </div>
+
+          <div class="link-card">
+            <header>
+              <h2>Dler API 合成链接</h2>
+              <div class="action-row">
+                <button class="copy-btn" data-target="linkB" type="button">复制</button>
+                <button class="open-btn button-secondary" data-target="linkB" type="button">一键拉起</button>
+              </div>
+            </header>
+            <textarea id="linkB" readonly></textarea>
+          </div>
+        </div>
+        <p class="helper">一键拉起使用通用协议 clash://install-config?url=...，不同客户端兼容性可能不同。</p>
+      </section>
+
+      <section class="resources">
+        <div class="resource-card">
+          <div>
+            <strong>Windows / macOS / Linux 推荐客户端</strong>
+            <div class="helper">Clash 客户端快速安装指南</div>
+          </div>
+          <a href="https://clash.guide/quickly/install.html" target="_blank" rel="noreferrer">查看指南</a>
+        </div>
+        <div class="resource-card">
+          <div>
+            <strong>Android 推荐客户端</strong>
+            <div class="helper">Clash Meta for Android</div>
+          </div>
+          <a href="https://clash.guide/clash-meta-for-android.html" target="_blank" rel="noreferrer">查看指南</a>
+        </div>
+        <div class="resource-card">
+          <div>
+            <strong>iOS 推荐客户端</strong>
+            <div class="helper">Clash Mi 教程</div>
+          </div>
+          <a href="https://clash.guide/clashmi.html" target="_blank" rel="noreferrer">查看指南</a>
+        </div>
+        <div class="resource-card">
+          <div>
+            <strong>项目原始地址</strong>
+            <div class="helper">yujianke100/chatgpt-openclash</div>
+          </div>
+          <a href="https://github.com/yujianke100/chatgpt-openclash" target="_blank" rel="noreferrer">查看仓库</a>
+        </div>
+      </section>
+
+      <footer>
+        提示：系统会自动对订阅链接进行 URL 编码后再生成合成链接。
+      </footer>
+    </div>
+
+    <script>
+      const input = document.getElementById("subUrl");
+      const linkA = document.getElementById("linkA");
+      const linkB = document.getElementById("linkB");
+      const generateBtn = document.getElementById("generateBtn");
+      const copyButtons = document.querySelectorAll(".copy-btn");
+      const openButtons = document.querySelectorAll(".open-btn");
+
+      const mkBase =
+        "https://api.v1.mk/sub?target=clash&url=" +
+        "{encoded}&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2Fyujianke100%2Fchatgpt-openclash%2Fmain%2FFull.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true";
+
+      const dlerBase =
+        "https://api.dler.io/sub?target=clash&new_name=true&url=" +
+        "{encoded}&config=https://raw.githubusercontent.com/yujianke100/chatgpt-openclash/main/Full.ini";
+
+      function buildLinks() {
+        const raw = input.value.trim();
+        if (!raw) {
+          linkA.value = "";
+          linkB.value = "";
+          return;
+        }
+        const encoded = encodeURIComponent(raw);
+        linkA.value = mkBase.replace("{encoded}", encoded);
+        linkB.value = dlerBase.replace("{encoded}", encoded);
+      }
+
+      function copyToClipboard(targetId) {
+        const target = document.getElementById(targetId);
+        if (!target || !target.value) {
+          return;
+        }
+        navigator.clipboard.writeText(target.value).catch(() => {
+          target.select();
+          document.execCommand("copy");
+          window.getSelection().removeAllRanges();
+        });
+      }
+
+      function openInClash(targetId) {
+        const target = document.getElementById(targetId);
+        if (!target || !target.value) {
+          return;
+        }
+        const encoded = encodeURIComponent(target.value);
+        window.location.href = `clash://install-config?url=${encoded}&name=东方网络`;
+      }
+
+      generateBtn.addEventListener("click", buildLinks);
+      input.addEventListener("input", buildLinks);
+      copyButtons.forEach((btn) => {
+        btn.addEventListener("click", () => copyToClipboard(btn.dataset.target));
+      });
+      openButtons.forEach((btn) => {
+        btn.addEventListener("click", () => openInClash(btn.dataset.target));
+      });
+    </script>
+  </body>
+</html>
